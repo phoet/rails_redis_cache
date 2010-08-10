@@ -13,7 +13,7 @@ module ActiveSupport
       attr_reader :redis
       
       def initialize(options={})
-        super()
+        super(options)
         @redis = Redis.connect(options)
       end
       
