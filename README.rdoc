@@ -1,1 +1,22 @@
-redis cache for rails3
+== About
+
+Cache store implementation for Rails 3 using the key value store Redis.
+
+== Usage
+
+In the environment.rb or environments-files write:
+
+  ActionController::Base.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+  
+  ... or ...
+  
+  config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+
+== Installing Redis
+
+Using a local Redis server for testing is simple:
+
+  brew install redis
+  redis-server
+
+
