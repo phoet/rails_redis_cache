@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
   s.files = [ 'README.rdoc', 'lib/rails_redis_cache.rb' ]
   s.test_files = [ 'test/test_rails_redis_cache.rb' ]
   
-  s.add_dependency('activesupport', '3.0.0.rc')
+  s.add_dependency('activesupport', '>= 3.0.0')
+  s.add_dependency('redis', '>= 2.0.0')
 end
