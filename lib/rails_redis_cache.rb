@@ -1,4 +1,5 @@
 require 'active_support'
+require 'base64'
 require 'redis'
 require 'time'
 
@@ -12,6 +13,7 @@ module ActiveSupport
       attr_reader :redis
       
       def initialize(options={})
+        super()
         @redis = Redis.connect(options)
       end
       
@@ -22,11 +24,12 @@ module ActiveSupport
         return nil unless raw_value
         
         time = Time.parse @redis.get("#{TIME_PREF}_#{key}")
-        ActiveSupport::Cache::Entry.create raw_value, time
+        puts "#{raw_value} #{raw_value.class}"
+        ActiveSupport::Cache::Entry.create Marshal.load(Base64.decode64(raw_value)), time
       end
 
       def write_entry(key, entry, options)
-        @redis.mset "#{VALUE_PREF}_#{key}", entry.value, "#{TIME_PREF}_#{key}", Time.now
+        @redis.mset "#{VALUE_PREF}_#{key}", Base64.encode64(Marshal.dump(entry.value.to_s)), "#{TIME_PREF}_#{key}", Time.now
         return unless expiry = options[:expires_in]
         @redis.expire "#{VALUE_PREF}_#{key}", expiry
         @redis.expire "#{TIME_PREF}_#{key}", expiry
@@ -45,11 +48,11 @@ module ActiveSupport
       end
 
       def increment(name, amount = 1, options = nil)
-        @redis.incr "#{VALUE_PREF}_#{name}"
+        write(name, amount + read(name, options).to_i, options)
       end
 
       def decrement(name, amount = 1, options = nil)
-        @redis.decr "#{VALUE_PREF}_#{name}"
+        write(name, -1 * amount + read(name, options).to_i, options)
       end
 
       def cleanup(options = nil)
