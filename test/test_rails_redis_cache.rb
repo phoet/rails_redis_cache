@@ -50,8 +50,13 @@ class TestRailsRedisCache < Test::Unit::TestCase
     assert_equal(count, 2)
   end
   
-  def test_with_proc
+  def test_fetch_with_proc
     @cache.fetch(@key, @options, &lambda{@value})
+  end
+  
+  def test_fetch_with_array
+    @cache.fetch(@key, @options){[@value]}
+    assert_equal([@value], @cache.fetch(@key, @options))
   end
   
   def test_delete_matched

@@ -24,12 +24,14 @@ module ActiveSupport
         return nil unless raw_value
         
         time = Time.parse @redis.get("#{TIME_PREF}_#{key}")
-        puts "#{raw_value} #{raw_value.class}"
-        ActiveSupport::Cache::Entry.create Marshal.load(Base64.decode64(raw_value)), time
+        value = Marshal.load(Base64.decode64(raw_value))
+        ActiveSupport::Cache::Entry.create value, time
       end
 
       def write_entry(key, entry, options)
-        @redis.mset "#{VALUE_PREF}_#{key}", Base64.encode64(Marshal.dump(entry.value.to_s)), "#{TIME_PREF}_#{key}", Time.now
+        value = Base64.encode64(Marshal.dump(entry.value))
+        time = Time.now
+        @redis.mset "#{VALUE_PREF}_#{key}", value, "#{TIME_PREF}_#{key}", time
         return unless expiry = options[:expires_in]
         @redis.expire "#{VALUE_PREF}_#{key}", expiry
         @redis.expire "#{TIME_PREF}_#{key}", expiry
