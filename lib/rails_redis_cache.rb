@@ -17,30 +17,6 @@ module ActiveSupport
         @redis = Redis.connect(options)
       end
       
-      # ============================= basic store impl ==============================
-      
-      def read_entry(key, options)
-        raw_value = @redis.get "#{VALUE_PREF}_#{key}"
-        return nil unless raw_value
-        
-        time = Time.parse @redis.get("#{TIME_PREF}_#{key}")
-        value = Marshal.load(Base64.decode64(raw_value))
-        ActiveSupport::Cache::Entry.create value, time
-      end
-
-      def write_entry(key, entry, options)
-        value = Base64.encode64(Marshal.dump(entry.value))
-        time = Time.now
-        @redis.mset "#{VALUE_PREF}_#{key}", value, "#{TIME_PREF}_#{key}", time
-        return unless expiry = options[:expires_in]
-        @redis.expire "#{VALUE_PREF}_#{key}", expiry
-        @redis.expire "#{TIME_PREF}_#{key}", expiry
-      end
-
-      def delete_entry(key, options)
-        @redis.del "#{VALUE_PREF}_#{key}", "#{TIME_PREF}_#{key}"
-      end
-      
       # ============================= optional store impl ==============================
       
       def delete_matched(matcher, options = nil)
@@ -67,6 +43,32 @@ module ActiveSupport
         cleanup(options)
       end
       
+      # ============================= basic store impl ==============================
+      
+      protected
+      
+      def read_entry(key, options)
+        raw_value = @redis.get "#{VALUE_PREF}_#{key}"
+        return nil unless raw_value
+        
+        time = Time.parse @redis.get("#{TIME_PREF}_#{key}")
+        value = Marshal.load(Base64.decode64(raw_value))
+        ActiveSupport::Cache::Entry.create value, time
+      end
+
+      def write_entry(key, entry, options)
+        value = Base64.encode64(Marshal.dump(entry.value))
+        time = Time.now
+        @redis.mset "#{VALUE_PREF}_#{key}", value, "#{TIME_PREF}_#{key}", time
+        return unless expiry = options[:expires_in]
+        @redis.expire "#{VALUE_PREF}_#{key}", expiry
+        @redis.expire "#{TIME_PREF}_#{key}", expiry
+      end
+
+      def delete_entry(key, options)
+        @redis.del "#{VALUE_PREF}_#{key}", "#{TIME_PREF}_#{key}"
+      end
+            
     end
   end 
 end

@@ -12,6 +12,10 @@ In the environment.rb or environments-files write:
   
   config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
 
+Using the cache is simple:
+
+  @tweets = cache("tweets", :expires_in => 30.seconds){ Twitter::Search.new(...) }
+
 == Installing Redis
 
 Using a local Redis server for testing is simple:
@@ -19,4 +23,7 @@ Using a local Redis server for testing is simple:
   brew install redis
   redis-server
 
+== TODO
 
+* More Docs, especially on implementation
+* Link to Examples
