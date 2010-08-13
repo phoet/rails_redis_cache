@@ -2,7 +2,7 @@
 
 spec = Gem::Specification.new do |s|
   s.name = 'rails_redis_cache'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
 
   s.author = 'Peter Schröder'
   s.description = 'Rails cache store implementation using Redis.'

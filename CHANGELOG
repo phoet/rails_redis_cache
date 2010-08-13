@@ -1,0 +1,11 @@
+0.0.3
+
+* provide fix for edge-case when redis did not store the time-key properly
+
+0.0.2
+
+* adapt edge rails (3.RC) cache store impl, that uses options for initialization
+
+0.0.1
+
+* basic implementation of cache store

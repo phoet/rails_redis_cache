@@ -4,7 +4,22 @@ require 'redis'
 require 'time'
 
 module ActiveSupport
-  module Cache
+  module Cache    
+    
+    # RailsRedisCache is Rails 3 cache store implementation using the key value store Redis.
+    # 
+    # Author::    Peter Schröder  (mailto:phoetmail@googlemail.com)
+    # 
+    # ==Usage
+    # 
+    # Add the gem to your Gemfile
+    # 
+    #   gem "rails_redis_cache"
+    # 
+    # and configure the cache store
+    # 
+    #   config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+    # 
     class RailsRedisCache < Store
       
       TIME_PREF = "rails_redis_cache_time"
@@ -12,6 +27,18 @@ module ActiveSupport
       
       attr_reader :redis
       
+      # Initializes the cache store and opens a connection to Redis.
+      # 
+      #   ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+      # 
+      # ==== Options:
+      # 
+      # [url] the url to the Redis instance
+      # 
+      # ==== More Options:
+      # 
+      # Have a look at redis-rb and Rails docs for further options
+      # 
       def initialize(options={})
         super(options)
         @redis = Redis.connect(options)
@@ -51,7 +78,8 @@ module ActiveSupport
         raw_value = @redis.get "#{VALUE_PREF}_#{key}"
         return nil unless raw_value
         
-        time = Time.parse @redis.get("#{TIME_PREF}_#{key}")
+        raw_time = @redis.get("#{TIME_PREF}_#{key}")
+        time = raw_time.nil? ? nil : Time.parse(raw_time)
         value = Marshal.load(Base64.decode64(raw_value))
         ActiveSupport::Cache::Entry.create value, time
       end

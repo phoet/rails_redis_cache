@@ -1,6 +1,6 @@
 == About
 
-Cache store implementation for Rails 3 using the key value store Redis.
+Cache store implementation for Rails 3 using the key value store Redis[http://code.google.com/p/redis].
 
 == Usage
 
@@ -16,14 +16,13 @@ Using the cache is simple:
 
   @tweets = cache("tweets", :expires_in => 30.seconds){ Twitter::Search.new(...) }
 
-== Installing Redis
+== Installing Redis with homebrew
 
 Using a local Redis server for testing is simple:
 
   brew install redis
   redis-server
 
-== TODO
+== Changelog
 
-* More Docs, especially on implementation
-* Link to Examples
+See CHANGELOG file for further information.

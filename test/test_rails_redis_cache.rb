@@ -99,5 +99,11 @@ class TestRailsRedisCache < Test::Unit::TestCase
     @cache.cleanup
     assert_equal(0, @cache.redis.dbsize)
   end
+  
+  def test_edge_case_with_missing_time_key
+    @cache.write(@key, @value)
+    @cache.redis.del "#{ActiveSupport::Cache::RailsRedisCache::TIME_PREF}_#{@key}"
+    assert_equal(@value, @cache.read(@key))
+  end
 
 end
