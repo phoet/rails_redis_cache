@@ -16,7 +16,7 @@ spec = Gem::Specification.new do |s|
   s.files = Dir.glob('lib/*.rb') + %w(README.rdoc)
   s.test_files = Dir.glob('test/test_*.rb')
   
-  s.add_dependency('activesupport', '>= 3.0.0.beta')
-  s.add_dependency('redis', '>= 2.0.0')
+  s.add_dependency('activesupport', '~> 3.0.0.beta')
+  s.add_dependency('redis', '~> 2.0.5')
 end
 
