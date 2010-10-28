@@ -4,7 +4,7 @@ require 'redis'
 require 'time'
 
 module ActiveSupport
-  module Cache    
+  module Cache
     
     # RailsRedisCache is Rails 3 cache store implementation using the key value store Redis.
     # 
@@ -57,12 +57,12 @@ module ActiveSupport
       end
 
       def decrement(name, amount = 1, options = nil)
-        write(name, -1 * amount + read(name, options).to_i, options)
+        increment(name, amount * -1, options)
       end
 
       def cleanup(options = nil)
-        p value_keys = @redis.keys("#{VALUE_PREF}_*")
-        p time_keys = @redis.keys("#{TIME_PREF}_*")
+        value_keys = @redis.keys("#{VALUE_PREF}_*")
+        time_keys = @redis.keys("#{TIME_PREF}_*")
         @redis.del *(value_keys + time_keys)
       end
 
