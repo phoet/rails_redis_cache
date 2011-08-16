@@ -1,6 +1,8 @@
 == About
 
-Cache store implementation for Rails 3 using the key value store Redis[http://code.google.com/p/redis].
+Cache store implementation for Rails 3.1 using the key value store Redis[http://code.google.com/p/redis].
+
+If you are looking for Rails 3 implementation please have a look at latest stable release version 0.0.4.
 
 == Usage
 
