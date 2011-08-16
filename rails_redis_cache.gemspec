@@ -13,11 +13,12 @@ spec = Gem::Specification.new do |s|
 
   s.has_rdoc = true
   s.rdoc_options = ['-a', '--inline-source', '--charset=UTF-8']
-  
+
   s.files = Dir.glob('lib/*.rb') + %w(README.rdoc CHANGELOG)
   s.test_files = Dir.glob('test/test_*.rb')
-  
+
   s.add_dependency('activesupport', '~> 3.1.0.rc5')
   s.add_dependency('redis', '~> 2.0.0')
-end
 
+  s.add_development_dependency('rake', '~> 0.9.2')
+end
