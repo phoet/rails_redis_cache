@@ -3,6 +3,7 @@ PATH
   specs:
     rails_redis_cache (0.1.0)
       activesupport (~> 3.1.0.rc5)
+      i18n (~> 0.6.0)
       redis (~> 2.0.0)
 
 GEM
@@ -10,6 +11,7 @@ GEM
   specs:
     activesupport (3.1.0.rc5)
       multi_json (~> 1.0)
+    i18n (0.6.0)
     multi_json (1.0.3)
     rake (0.9.2)
     redis (2.0.13)
