@@ -7,8 +7,7 @@ spec = Gem::Specification.new do |s|
   s.author = 'Peter Schröder'
   s.description = 'Rails 3.1 cache store implementation using Redis.'
   s.email = 'phoetmail@googlemail.com'
-  s.homepage = 'http://github.com/phoet/rails_redis_cache'
-  s.rubyforge_project = 'http://github.com/phoet/rails_redis_cache'
+  s.rubyforge_project = s.homepage = 'http://github.com/phoet/rails_redis_cache'
   s.summary = 'Rails 3.1 cache store implementation using Redis. See http://github.com/phoet/rails_redis_cache for more information.'
 
   s.has_rdoc = true
