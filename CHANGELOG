@@ -1,3 +1,7 @@
+0.1.0
+
+* support for Rails 3.1
+
 0.0.4
 
 * less restrictive dependencies with '~>'

@@ -1,2 +1,1 @@
-rvm 1.9.1@rails_redis_cache --create
-rvm wrapper 1.9.1@rails_redis_cache textmate
+rvm 1.9.2@rails_redis_cache --create
