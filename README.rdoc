@@ -31,3 +31,7 @@ Using a local Redis server for testing is simple:
 == Changelog
 
 See CHANGELOG file for further information.
+
+== License
+
+See LICENSE file for further information.

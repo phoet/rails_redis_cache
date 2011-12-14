@@ -1,1 +1,1 @@
-rvm 1.9.3@rails_redis_cache --create
+rvm use 1.9.3@rails_redis_cache --create

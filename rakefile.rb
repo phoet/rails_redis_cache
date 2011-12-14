@@ -1,8 +1,8 @@
 require "bundler"
-require "rspec/core/rake_task"
-require "rake/rdoctask"
-
 Bundler::GemHelper.install_tasks
+
+require "rspec/core/rake_task"
+require "rdoc/task"
 
 Rake::RDocTask.new(:rdoc_dev) do |rd|
   rd.rdoc_files.include("lib/**/*.rb", "README.rdoc")
@@ -14,4 +14,4 @@ RSpec::Core::RakeTask.new do |t|
   t.pattern = 'spec/**/*_spec.rb'
 end
 
-task :default=>:spec
+task :default => :spec
