@@ -1,5 +1,8 @@
 == About
 
+Status: http://stillmaintained.com/phoet/rails_redis_cache.png
+Build: http://travis-ci.org/phoet/rails_redis_cache.png
+
 Cache store implementation for Rails 3.1 using the key value store Redis[http://code.google.com/p/redis].
 
 If you are looking for Rails 3 implementation please have a look at latest stable release version 0.0.4.
@@ -8,11 +11,11 @@ If you are looking for Rails 3 implementation please have a look at latest stabl
 
 In the environment.rb or environments-files write:
 
-  ActionController::Base.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+  ActionController::Base.cache_store = ActiveSupport::Cache::RailsRedisCacheStore.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
   
   ... or ...
   
-  config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
+  config.cache_store = ActiveSupport::Cache::RailsRedisCacheStore.new(:url => ENV['RAILS_REDIS_CACHE_URL'])
 
 Using the cache is simple:
 
