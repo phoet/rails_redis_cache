@@ -1,7 +1,7 @@
 == About
 
 Status: http://stillmaintained.com/phoet/rails_redis_cache.png
-Build: https://secure.travis-ci.org/phoet/rails_redis_cache.png
+Build: <img src="https://secure.travis-ci.org/phoet/rails_redis_cache.png?branch=develop" />
 
 Cache store implementation for Rails 3.1 using the key value store Redis[http://code.google.com/p/redis].
 
