@@ -1,2 +1,4 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','..','lib')
-require 'test/unit'
+require 'rspec'
+require 'rails_redis_cache'
+require 'logger'

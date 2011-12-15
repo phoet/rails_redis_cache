@@ -1,3 +1,9 @@
+0.2.0
+
+* renamed cache
+* less restrictions to dependencies
+* rspec instead of test-unit
+
 0.1.0
 
 * support for Rails 3.1
